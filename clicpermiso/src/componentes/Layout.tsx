@@ -5,7 +5,7 @@ const Layout = () => {
     <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'sans-serif' }}>
       <nav style={{ width: '250px', borderRight: '1px solid #eee', padding: '20px' }}>
         <div style={{ marginBottom: '40px' }}>
-          <img src="/logo.png" alt="Logo" style={{ width: '150px' }} />
+          <img src="componentes/logo.png" alt="Logo" style={{ width: '150px' }} />
         </div>
         
         <ul style={{ listStyle: 'none', padding: 0 }}>
