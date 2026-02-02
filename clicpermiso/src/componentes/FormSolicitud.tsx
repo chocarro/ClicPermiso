@@ -34,7 +34,7 @@ const FormSolicitud: React.FC = () => {
     }
 
     if (!telRegex.test(values.telefono)) {
-      newErrors.telefono = "Teléfono inválido";
+      newErrors.telefono = "Debe empezar por 6-9 y tener 9 dígitos";
     }
 
     if (isNaN(numHoras) || numHoras <= 0 || numHoras >= 8) {
@@ -49,70 +49,138 @@ const FormSolicitud: React.FC = () => {
     e.preventDefault();
     if (validarJS()) {
       console.log(values);
+      alert("Solicitud enviada con éxito");
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>Solicitud para el día: {values.diaSolicitado || "___/___/____"}</h2>
-
+    <div style={styles.container}>
+      <h2 style={styles.title}>
+        Solicitud para el día: {values.diaSolicitado || "___/___/____"}
+      </h2>
+      
       <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="diaSolicitado">Día Solicitado:</label>
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="diaSolicitado">Día Solicitado (dd/mm/yyyy):</label>
           <input 
             type="text"
             id="diaSolicitado"
             name="diaSolicitado" 
+            placeholder="Ej: 25/05/2026"
             value={values.diaSolicitado} 
             onChange={handleChange} 
+            style={styles.input}
           />
-          {errors.diaSolicitado && <span>{errors.diaSolicitado}</span>}
+          {errors.diaSolicitado && <span style={styles.error}>{errors.diaSolicitado}</span>}
         </div>
 
-        <div>
-          <label htmlFor="telefono">Teléfono:</label>
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="telefono">Teléfono:</label>
           <input 
             type="text" 
             id="telefono"
             name="telefono" 
             value={values.telefono} 
             onChange={handleChange} 
+            style={styles.input}
           />
-          {errors.telefono && <span>{errors.telefono}</span>}
+          {errors.telefono && <span style={styles.error}>{errors.telefono}</span>}
         </div>
 
-        <div>
-          <label htmlFor="jornada">Jornada:</label>
-          <select id="jornada" name="jornada" value={values.jornada} onChange={handleChange}>
-            <option value="Completa">Completa</option>
-            <option value="Parcial">Parcial</option>
-          </select>
+        <div style={styles.row}>
+          <div style={{ ...styles.group, flex: 1 }}>
+            <label style={styles.label} htmlFor="jornada">Jornada:</label>
+            <select id="jornada" name="jornada" value={values.jornada} onChange={handleChange} style={styles.input}>
+              <option value="Completa">Completa</option>
+              <option value="Parcial">Parcial</option>
+            </select>
+          </div>
+
+          <div style={{ ...styles.group, flex: 1 }}>
+            <label style={styles.label} htmlFor="turno">Turno:</label>
+            <select id="turno" name="turno" value={values.turno} onChange={handleChange} style={styles.input}>
+              <option value="Diurno">Diurno</option>
+              <option value="Vespertino">Vespertino</option>
+            </select>
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="turno">Turno:</label>
-          <select id="turno" name="turno" value={values.turno} onChange={handleChange}>
-            <option value="Diurno">Diurno</option>
-            <option value="Vespertino">Vespertino</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="horas">Número de horas:</label>
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="horas">Número de horas (1-7):</label>
           <input 
             type="number" 
             id="horas"
             name="horas" 
             value={values.horas} 
             onChange={handleChange} 
+            style={styles.input}
           />
-          {errors.horas && <span>{errors.horas}</span>}
+          {errors.horas && <span style={styles.error}>{errors.horas}</span>}
         </div>
 
-        <button type="submit">Enviar</button>
+        <button type="submit" style={styles.button}>Enviar Solicitud</button>
       </form>
     </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  container: {
+    padding: '30px',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    maxWidth: '550px',
+    margin: '0 auto',
+  },
+  title: {
+    color: '#1a237e',
+    marginBottom: '25px',
+    fontSize: '1.4rem',
+    borderBottom: '2px solid #f0f2f5',
+    paddingBottom: '10px'
+  },
+  group: {
+    marginBottom: '18px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  row: {
+    display: 'flex',
+    gap: '15px',
+    marginBottom: '18px',
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#555',
+    marginBottom: '8px',
+  },
+  input: {
+    padding: '10px 14px',
+    borderRadius: '8px',
+    border: '1px solid #ddd',
+    fontSize: '15px',
+    outline: 'none',
+  },
+  error: {
+    color: '#d32f2f',
+    fontSize: '12px',
+    marginTop: '5px',
+    fontWeight: '500',
+  },
+  button: {
+    backgroundColor: '#1a237e',
+    color: 'white',
+    padding: '12px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    width: '100%',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    marginTop: '10px',
+    transition: 'background-color 0.2s',
+  }
 };
 
 export default FormSolicitud;
