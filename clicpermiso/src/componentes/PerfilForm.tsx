@@ -68,56 +68,152 @@ const PerfilForm: React.FC = () => {
     e.preventDefault();
     if (validarJS()) {
       console.log(values);
+      alert("Perfil actualizado correctamente");
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>Editar Perfil</h2>
+    <div style={styles.container}>
+      <h2 style={styles.title}>Editar Perfil</h2>
+      
       <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" value={values.nombre} onChange={handleChange} />
-          {errors.nombre && <span>{errors.nombre}</span>}
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="nombre">Nombre:</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            name="nombre" 
+            value={values.nombre} 
+            onChange={handleChange} 
+            style={styles.input}
+          />
+          {errors.nombre && <span style={styles.error}>{errors.nombre}</span>}
         </div>
 
-        <div>
-          <label htmlFor="apellidos">Apellidos:</label>
-          <input type="text" id="apellidos" name="apellidos" value={values.apellidos} onChange={handleChange} />
-          {errors.apellidos && <span>{errors.apellidos}</span>}
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="apellidos">Apellidos:</label>
+          <input 
+            type="text" 
+            id="apellidos" 
+            name="apellidos" 
+            value={values.apellidos} 
+            onChange={handleChange} 
+            style={styles.input}
+          />
+          {errors.apellidos && <span style={styles.error}>{errors.apellidos}</span>}
         </div>
 
-        <div>
-          <label htmlFor="email">Correo Electrónico:</label>
-          <input type="email" id="email" name="email" value={values.email} onChange={handleChange} />
-          {errors.email && <span>{errors.email}</span>}
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="email">Correo Electrónico:</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            value={values.email} 
+            onChange={handleChange} 
+            style={styles.input}
+          />
+          {errors.email && <span style={styles.error}>{errors.email}</span>}
         </div>
 
-        <div>
-          <label htmlFor="dni">DNI:</label>
-          <input type="text" id="dni" name="dni" value={values.dni} onChange={handleChange} />
-          {errors.dni && <span>{errors.dni}</span>}
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="dni">DNI:</label>
+          <input 
+            type="text" 
+            id="dni" 
+            name="dni" 
+            value={values.dni} 
+            onChange={handleChange} 
+            style={styles.input}
+          />
+          {errors.dni && <span style={styles.error}>{errors.dni}</span>}
         </div>
 
-        <div>
-          <label htmlFor="relacionJuridica">Relación Jurídica:</label>
-          <select id="relacionJuridica" name="relacionJuridica" value={values.relacionJuridica} onChange={handleChange}>
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="relacionJuridica">Relación Jurídica:</label>
+          <select 
+            id="relacionJuridica" 
+            name="relacionJuridica" 
+            value={values.relacionJuridica} 
+            onChange={handleChange} 
+            style={styles.input}
+          >
             <option value="Otro">Otro</option>
             <option value="Indefinido">Indefinido</option>
             <option value="Temporal">Temporal</option>
           </select>
         </div>
 
-        <div>
-          <label htmlFor="aniosServicio">Años de servicio:</label>
-          <input type="number" id="aniosServicio" name="aniosServicio" value={values.aniosServicio} onChange={handleChange} />
-          {errors.aniosServicio && <span>{errors.aniosServicio}</span>}
+        <div style={styles.group}>
+          <label style={styles.label} htmlFor="aniosServicio">Años de servicio:</label>
+          <input 
+            type="number" 
+            id="aniosServicio" 
+            name="aniosServicio" 
+            value={values.aniosServicio} 
+            onChange={handleChange} 
+            style={styles.input}
+          />
+          {errors.aniosServicio && <span style={styles.error}>{errors.aniosServicio}</span>}
         </div>
 
-        <button type="submit">Guardar Perfil</button>
+        <button type="submit" style={styles.button}>Guardar Perfil</button>
       </form>
     </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  container: {
+    padding: '30px',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    maxWidth: '550px',
+    margin: '0 auto',
+  },
+  title: {
+    color: '#1a237e',
+    marginBottom: '25px',
+    fontSize: '1.4rem',
+    borderBottom: '2px solid #f0f2f5',
+    paddingBottom: '10px'
+  },
+  group: {
+    marginBottom: '18px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#555',
+    marginBottom: '8px',
+  },
+  input: {
+    padding: '10px 14px',
+    borderRadius: '8px',
+    border: '1px solid #ddd',
+    fontSize: '15px',
+    outline: 'none',
+  },
+  error: {
+    color: '#d32f2f',
+    fontSize: '12px',
+    marginTop: '5px',
+    fontWeight: '500',
+  },
+  button: {
+    backgroundColor: '#1a237e',
+    color: 'white',
+    padding: '12px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    width: '100%',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    marginTop: '10px',
+  }
 };
 
 export default PerfilForm;
